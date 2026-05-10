@@ -42,3 +42,9 @@ You only need [Node.js](https://nodejs.org/) installed on your computer.
 ## Deployment
 
 Because this app does not rely on a backend server, it is fully optimized to be deployed via **GitHub Pages**. Simply push the code to your `main` branch, go to your repository Settings -> Pages, and enable deployment from the `main` branch.
+
+## Credits & Acknowledgements
+
+This project was built as part of Yael Netzer's PhD thesis research. 
+
+Special thanks to [Yoav Goldberg](https://github.com/yoavg) for the foundational work on the original Blissymbols rendering algorithms and data structures which made this modern adaptation possible.
