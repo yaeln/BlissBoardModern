@@ -419,8 +419,8 @@ function applyIndicator(index, indicatorKey) {
   const item = sentence[index];
   const baseKey = item.baseKey;
   
-  // Toggle off if the same indicator is clicked
-  if (item.activeIndicator === indicatorKey) {
+  // Toggle off if CLEAR or the same indicator is clicked
+  if (indicatorKey === 'CLEAR' || item.activeIndicator === indicatorKey) {
     item.currentKey = baseKey;
     item.activeIndicator = null;
     renderSentence();
