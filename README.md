@@ -45,6 +45,4 @@ Because this app does not rely on a backend server, it is fully optimized to be 
 
 ## Credits & Acknowledgements
 
-This project was built as part of Yael Netzer's PhD thesis research. 
-
-Special thanks to [Yoav Goldberg](https://github.com/yoavg) for the foundational work on the original Blissymbols rendering algorithms and data structures which made this modern adaptation possible.
+This project was built as part of Yael Netzer's PhD thesis research (submitted 2006), based on [Yoav Goldberg's](https://github.com/yoavg) project - the foundational work on the original Blissymbols rendering algorithms 2004-2005 and data structures which made this modern adaptation possible.
