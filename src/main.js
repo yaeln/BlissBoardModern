@@ -120,16 +120,20 @@ function setupEventListeners() {
         // 1. Try to find an exact match first
         let bestMatch = symbolKeys.find(k => {
           const en = (appData.translations['en'][k] || k).toLowerCase();
+          const he = (appData.translations['he'][k] || '').toLowerCase();
+          const raw = k.toLowerCase();
           const enStripped = en.startsWith('to ') ? en.substring(3) : en;
-          return en === query || enStripped === query;
+          return en === query || he === query || raw === query || enStripped === query;
         });
         
         // 2. Try to find a match that starts with the query
         if (!bestMatch) {
           bestMatch = symbolKeys.find(k => {
             const en = (appData.translations['en'][k] || k).toLowerCase();
+            const he = (appData.translations['he'][k] || '').toLowerCase();
+            const raw = k.toLowerCase();
             const enStripped = en.startsWith('to ') ? en.substring(3) : en;
-            return en.startsWith(query) || enStripped.startsWith(query);
+            return en.startsWith(query) || he.startsWith(query) || raw.startsWith(query) || enStripped.startsWith(query);
           });
         }
         
