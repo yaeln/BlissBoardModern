@@ -1,5 +1,7 @@
 # Bliss Board Modern
 
+**[🌍 View Live Demo](https://yaeln.github.io/BlissBoardModern/)**
+
 A modern, fast, and fully responsive web application for interacting with Blissymbolics. This project features a completely custom Canvas-based rendering engine that dynamically draws Blissymbols from their geometric primitives, meaning symbols scale infinitely without loss of quality.
 
 ## Features
