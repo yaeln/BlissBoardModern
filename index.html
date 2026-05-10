@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Bliss Board</title>
+    <link rel="stylesheet" href="./style.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="app-container">
+      <header class="header glass">
+        <div class="header-top">
+            <h1>Bliss Board Modern</h1>
+            <div class="controls">
+                <button id="lang-toggle">Language: English</button>
+                <button id="clear-sentence">Clear Sentence</button>
+            </div>
+        </div>
+      </header>
+
+      <div class="search-sort-bar glass">
+          <div class="search-container" style="display: flex; gap: 5px; flex: 1;">
+              <input type="text" id="search-box" placeholder="Search symbols (Press Tab to autocomplete)..." class="search-input">
+              <button id="clear-search" title="Clear Search">✖</button>
+          </div>
+          <select id="sort-select" class="sort-select">
+              <option value="freq" selected>Frequency (Composition)</option>
+              <option value="alpha">Alphabetical</option>
+          </select>
+      </div>
+
+      <div class="sentence-builder glass" id="sentence-container">
+          <!-- Max 10 items -->
+          <div style="color: rgba(255,255,255,0.5); margin: auto;">Click a symbol to add it to your sentence</div>
+      </div>
+
+      <div class="grid-controls glass">
+         <button id="prev-page">◀ Prev</button>
+         <span id="page-info">Page 1</span>
+         <button id="next-page">Next ▶</button>
+      </div>
+
+      <div class="symbols-grid glass" id="symbols-grid">
+         <!-- 40 symbols go here -->
+      </div>
+    </div>
+    <script type="module" src="./src/main.js?v=14"></script>
+  </body>
+</html>
