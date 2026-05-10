@@ -55,13 +55,15 @@ body {
 }
 
 .search-input, .sort-select {
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid var(--glass-border);
-  color: var(--text-color);
-  padding: 8px 12px;
-  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  padding: 10px 14px;
+  border-radius: 8px;
   font-family: 'Inter', sans-serif;
   outline: none;
+  font-size: 15px;
 }
 
 #clear-search {
@@ -238,11 +240,13 @@ button:hover {
 }
 
 .symbol-card span {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 700;
   text-align: center;
   word-wrap: break-word;
   max-width: 100%;
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .parts-list {
