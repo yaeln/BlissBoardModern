@@ -108,6 +108,17 @@ button:hover {
   padding: 20px;
   min-height: 120px;
   overflow-x: auto;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  align-items: center;
+}
+
+.empty-sentence-text {
+  color: #666666;
+  margin: auto;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
 }
 
 .sentence-item {
@@ -285,12 +296,13 @@ button:hover {
 }
 
 .about-link {
-  color: var(--text-color);
+  color: #1e1e2e;
+  font-weight: 600;
   text-decoration: none;
   font-size: 0.9rem;
   padding: 8px 15px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--glass-border);
+  background: var(--accent);
+  border: 1px solid var(--accent);
   border-radius: 8px;
   transition: all 0.2s ease;
   display: inline-flex;
@@ -298,6 +310,7 @@ button:hover {
 }
 
 .about-link:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: #93c5fd;
+  border-color: #93c5fd;
+  transform: translateY(-1px);
 }
