@@ -244,7 +244,7 @@ function createSymbolCard(key) {
 
   const selectSymbol = () => {
     if (sentence.length < 10) {
-      sentence.push(key);
+      sentence.push({ baseKey: key, currentKey: key, activeIndicator: null });
       selectedSentenceIndex = sentence.length - 1; // Auto-select new symbol
       renderSentence();
       
@@ -381,7 +381,8 @@ function renderSentence() {
     return;
   }
 
-  sentence.forEach((key, index) => {
+  sentence.forEach((itemObj, index) => {
+    const key = itemObj.currentKey;
     const item = document.createElement('div');
     item.className = 'sentence-item';
     if (index === selectedSentenceIndex) {
@@ -415,7 +416,18 @@ function renderSentence() {
 }
 
 function applyIndicator(index, indicatorKey) {
-  const baseKey = sentence[index];
+  const item = sentence[index];
+  const baseKey = item.baseKey;
+  
+  // Toggle off if the same indicator is clicked
+  if (item.activeIndicator === indicatorKey) {
+    item.currentKey = baseKey;
+    item.activeIndicator = null;
+    renderSentence();
+    return;
+  }
+  
+  item.activeIndicator = indicatorKey;
   
   // 1. Semantic Lookup: Look for official composite
   const match = Object.keys(appData.store).find(k => {
@@ -429,7 +441,7 @@ function applyIndicator(index, indicatorKey) {
   });
 
   if (match) {
-    sentence[index] = match; // Officially shift meaning!
+    item.currentKey = match; // Officially shift meaning!
   } else {
     // 2. Dynamic generation
     const dynamicKey = `DYNAMIC_${baseKey}_${indicatorKey}`;
@@ -443,7 +455,7 @@ function applyIndicator(index, indicatorKey) {
       appData.translations['en'][dynamicKey] = `${baseEn} (+)`;
       appData.translations['he'][dynamicKey] = `${baseHe} (+)\u200E`;
     }
-    sentence[index] = dynamicKey;
+    item.currentKey = dynamicKey;
   }
   
   renderSentence();
