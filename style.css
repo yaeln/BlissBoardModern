@@ -151,6 +151,50 @@ button:hover {
   color: #1e1e2e;
 }
 
+.sentence-item.selected canvas {
+  border: 3px solid var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+  transform: translateY(-2px);
+}
+
+.indicator-pane {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 15px 20px;
+  align-items: center;
+  justify-content: center;
+  background: var(--glass-bg);
+  border-top: none;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  margin-top: -10px; /* Connect it seamlessly to the sentence builder */
+  margin-bottom: 20px;
+}
+
+.indicator-title {
+  color: var(--text-color);
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.indicator-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-color);
+  border: 1px solid var(--glass-border);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.indicator-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #1e1e2e;
+}
+
 .grid-controls {
   display: flex;
   justify-content: center;

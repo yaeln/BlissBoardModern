@@ -8,6 +8,7 @@ let allSymbolKeys = [];
 let symbolKeys = [];
 let currentLang = 'en';
 let sentence = [];
+let selectedSentenceIndex = null;
 let frequencyMap = {};
 let exactMatchKey = null;
 
@@ -163,7 +164,16 @@ function setupEventListeners() {
 
   document.getElementById('clear-sentence').addEventListener('click', () => {
     sentence = [];
+    selectedSentenceIndex = null;
     renderSentence();
+  });
+
+  document.querySelectorAll('.indicator-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (selectedSentenceIndex === null) return;
+      const indicatorKey = btn.dataset.indicator;
+      applyIndicator(selectedSentenceIndex, indicatorKey);
+    });
   });
 }
 
@@ -235,6 +245,7 @@ function createSymbolCard(key) {
   const selectSymbol = () => {
     if (sentence.length < 10) {
       sentence.push(key);
+      selectedSentenceIndex = sentence.length - 1; // Auto-select new symbol
       renderSentence();
       
       // Clear search and reset grid to main screen after selection
@@ -358,17 +369,25 @@ function renderGrid() {
 
 function renderSentence() {
   const container = document.getElementById('sentence-container');
+  const indicatorPane = document.getElementById('indicator-pane');
   container.innerHTML = '';
 
+  indicatorPane.style.display = selectedSentenceIndex !== null ? 'flex' : 'none';
+
   if (sentence.length === 0) {
-    container.innerHTML = '<div style="color: rgba(255,255,255,0.5); margin: auto;">Click a symbol to add it to your sentence</div>';
+    container.innerHTML = '<div class="empty-sentence-text">Click a symbol to add it to your sentence</div>';
+    selectedSentenceIndex = null;
+    indicatorPane.style.display = 'none';
     return;
   }
 
   sentence.forEach((key, index) => {
     const item = document.createElement('div');
     item.className = 'sentence-item';
-    item.title = 'Click to remove';
+    if (index === selectedSentenceIndex) {
+      item.classList.add('selected');
+    }
+    item.title = index === selectedSentenceIndex ? 'Click again to remove' : 'Click to select / remove';
     
     const canvas = document.createElement('canvas');
     canvas.width = 160;
@@ -381,13 +400,53 @@ function renderSentence() {
     item.appendChild(label);
     
     item.addEventListener('click', () => {
-      sentence.splice(index, 1);
+      if (selectedSentenceIndex === index) {
+        sentence.splice(index, 1);
+        selectedSentenceIndex = null;
+      } else {
+        selectedSentenceIndex = index;
+      }
       renderSentence();
     });
 
     blissRenderer.drawSymbolOnCanvas(canvas, key);
     container.appendChild(item);
   });
+}
+
+function applyIndicator(index, indicatorKey) {
+  const baseKey = sentence[index];
+  
+  // 1. Semantic Lookup: Look for official composite
+  const match = Object.keys(appData.store).find(k => {
+    const symbol = appData.store[k];
+    if (symbol.type !== 'Superimposed' || !symbol.parts) return false;
+    // Must contain exactly both parts
+    if (symbol.parts.length === 2 && symbol.parts.includes(baseKey) && symbol.parts.includes(indicatorKey)) {
+      return true;
+    }
+    return false;
+  });
+
+  if (match) {
+    sentence[index] = match; // Officially shift meaning!
+  } else {
+    // 2. Dynamic generation
+    const dynamicKey = `DYNAMIC_${baseKey}_${indicatorKey}`;
+    if (!appData.store[dynamicKey]) {
+      appData.store[dynamicKey] = {
+        type: 'Superimposed',
+        parts: [baseKey, indicatorKey]
+      };
+      const baseEn = appData.translations['en'][baseKey] || baseKey;
+      const baseHe = appData.translations['he'][baseKey] || '';
+      appData.translations['en'][dynamicKey] = `${baseEn} (+)`;
+      appData.translations['he'][dynamicKey] = `${baseHe} (+)\u200E`;
+    }
+    sentence[index] = dynamicKey;
+  }
+  
+  renderSentence();
 }
 
 init();

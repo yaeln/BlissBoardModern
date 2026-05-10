@@ -36,6 +36,17 @@
           <div class="empty-sentence-text">Click a symbol to add it to your sentence</div>
       </div>
 
+      <!-- Grammar Indicator Pane -->
+      <div id="indicator-pane" class="indicator-pane glass" style="display: none;">
+          <span class="indicator-title">Apply Grammar:</span>
+          <button class="indicator-btn" data-indicator="ACTION-INDICATOR">Action (Verb) ⌃</button>
+          <button class="indicator-btn" data-indicator="QUALITY_INDICATOR">Quality (Adj) ⌄</button>
+          <button class="indicator-btn" data-indicator="THING-INDICATOR">Thing (Noun) ◻</button>
+          <button class="indicator-btn" data-indicator="PLURAL-INDICATOR">Plural x</button>
+          <button class="indicator-btn" data-indicator="PAST-INDICATOR">Past Tense</button>
+          <button class="indicator-btn" data-indicator="FUTURE-INDICATOR">Future Tense</button>
+      </div>
+
       <div class="grid-controls glass">
          <button id="prev-page">◀ Prev</button>
          <span id="page-info">Page 1</span>
@@ -46,6 +57,6 @@
          <!-- 40 symbols go here -->
       </div>
     </div>
-    <script type="module" src="./src/main.js?v=19"></script>
+    <script type="module" src="./src/main.js?v=20"></script>
   </body>
 </html>
